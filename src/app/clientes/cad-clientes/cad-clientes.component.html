@@ -1,0 +1,101 @@
+<div *ngIf="!cadastro">
+  <nav class="navbar navbar-dark bg-dark teste">
+    <a class="navbar-brand" href="#">
+      <img style="margin-right: 17px;" src="../../assets/img/balanca.png" width="55" height="55" class="d-inline-block align-top"
+        alt="">
+      <span class="logo">Adicionar clientes </span>
+    </a>
+  </nav>
+
+
+
+
+
+
+  <div class="container-fluid ">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit(formulario)" class="teste">
+
+      <div class="form-row espaço">
+        <div class="form-group col-md-3">
+          <label for="processo">Processo</label>
+          <input type="text" class="form-control" onkeyup='this.value=this.value.replace(/[^0-9]*/g,"")' placeholder="Processo"
+            formControlName="processo" [ngClass]="aplicarCssErro('processo')">
+          <app-campo-control-erro [mostrarErro]="verificaValidTouched('processo')" msgErro="Campo obrigatório"></app-campo-control-erro>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputPassword4">Reclamante</label>
+
+          <input type="text" class="form-control" id="reclamanteId" placeholder="Reclamante" formControlName="reclamante"
+            [ngClass]="aplicarCssErro('reclamante')">
+          <app-campo-control-erro [mostrarErro]="verificaValidTouched('reclamante')" msgErro="Campo obrigatório"></app-campo-control-erro>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputAddress">Reclamada</label>
+          <input type="text" class="form-control" onkeyup='this.value=this.value.replace(/[^a-z],[^A-Z]*/g,"")' id="reclamadaId"
+            placeholder="Reclamada" formControlName="reclamada" [ngClass]="aplicarCssErro('reclamada')">
+          <app-campo-control-erro [mostrarErro]="verificaValidTouched('reclamada')" msgErro="Campo obrigatório"></app-campo-control-erro>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-1">
+          <label for="inputAddress2">Valor</label>
+          <input type="number" class="form-control" id="valorId" [(ngModel)]="cadClientes.valor" placeholder="Valor" formControlName="valor" [ngClass]="aplicarCssErro('valor')">
+          <app-campo-control-erro [mostrarErro]="verificaValidTouched('valor')" msgErro="Campo obrigatório"></app-campo-control-erro>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="inputCity">Parcelado em</label>
+          <input type="number" class="form-control" id="nparcelasId" [(ngModel)]="cadClientes.parcelado" placeholder="Número de parcelas" formControlName="parcelas"
+            [ngClass]="aplicarCssErro('parcelas')">
+          <app-campo-control-erro [mostrarErro]="verificaValidTouched('parcelas')" msgErro="Campo obrigatório"></app-campo-control-erro>
+        </div>
+        <!-- <div class="form-group col-md-2">
+      <label for="inputState">Parcelas</label>
+      <input type="number" class="form-control" id="parcelasId" placeholder="Parcelas" formControlName="parcelas" [ngClass]="aplicarCssErro('parcelas')">
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched('parcelas')" msgErro="Campo obrigatório"></app-campo-control-erro>
+    </div> -->
+        <div class="form-group col-md-2">
+          <label for="inputZip">Vencimento</label>
+          <input type="text" class="form-control" id="vencimentoId" placeholder="Vencimento" formControlName="vencimento"
+            [ngClass]="aplicarCssErro('vencimento')">
+          <app-campo-control-erro [mostrarErro]="verificaValidTouched('vencimento')" msgErro="Campo obrigatório"></app-campo-control-erro>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Status do pagamento</label>
+          <select class="form-control" id="selectId" formControlName="status" [ngClass]="aplicarCssErro('status')">
+            <app-campo-control-erro [mostrarErro]="verificaValidTouched('status')" msgErro="Campo obrigatório"></app-campo-control-erro>
+            <option value="0" disabled>Status...</option>
+            <option value="Pago">Pago</option>
+            <option value="Débito">Débito</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Tipo</label>
+          <select class="form-control" id="topoId" formControlName="tipo">
+            <option value="0" disabled>Tipo...</option>
+            <option value="Trabalhista">Trabalhista</option>
+            <option value="Penal">Penal</option>
+            <option value="Civil">Civil</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-1">
+          <button type="submit" [class.valid]="!formulario.valid" [disabled]="!formulario.valid" class="btn btn-secondary"
+            style="margin-bottom:10px;"><i class="fa fa-file" aria-hidden="true"></i><span class="v">Salvar</span></button>
+        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn btn-secondary" style="margin-bottom:10px;" (click)="voltarPagina()"><i class="fa fa-reply"></i><span
+              class="v">Voltar</span></button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="col-md-12">
+    <pre>{{formulario.value | json}}</pre>
+  </div>
+</div>
+<app-clientes *ngIf="cadastro"></app-clientes>
